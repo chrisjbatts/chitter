@@ -1,9 +1,12 @@
-RSpec.configure do |config|
+require 'capybara/rspec'
+require 'database_cleaner'
+require_relative '../server.rb'
 
 ENV['RACK_ENV'] = 'test'
 
-require_relative '../server.rb'
-require 'database_cleaner'
+Capybara.app = Chitter
+
+RSpec.configure do |config|
 
   config.before(:suite) do
     DatabaseCleaner.strategy = :transaction
