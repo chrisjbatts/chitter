@@ -1,6 +1,8 @@
 source 'https://rubygems.org'
 
-group :test do
+group :development, :test do
+  gem 'capybara'
+  gem 'data_cleaner'
   gem 'rspec'
 end
 

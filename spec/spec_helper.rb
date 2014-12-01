@@ -1,15 +1,21 @@
 RSpec.configure do |config|
 
-  ENV['RACK_ENV'] = 'test'
+ENV['RACK_ENV'] = 'test'
 
-  require_relative '../server.rb'
+require_relative '../server.rb'
+require 'database_cleaner'
 
-  config.expect_with :rspec do |expectations|
-    expectations.include_chain_clauses_in_custom_matcher_descriptions = true
+  config.before(:suite) do
+    DatabaseCleaner.strategy = :transaction
+    DatabaseCleaner.clean_with(:truncation)
   end
 
-  config.mock_with :rspec do |mocks|
-    mocks.verify_partial_doubles = true
+  config.before(:each) do
+    DatabaseCleaner.start
+  end
+
+  config.after(:each) do
+    DatabaseCleaner.clean
   end
 
 end
