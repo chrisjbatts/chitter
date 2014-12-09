@@ -17,5 +17,11 @@ class Chitter < Sinatra::Base
     erb :index
   end
 
+  post '/bleats' do
+    content = params["content"]
+    Bleat.create(:content => content)
+    redirect to('/')
+  end
+  
   run! if app_file == $0
 end

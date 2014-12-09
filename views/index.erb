@@ -1,5 +1,12 @@
 <ul>
-  <% @bleats.each do |link| %>
+  <% @bleats.each do |bleat| %>
    <li><%= bleat.content %></li>
   <% end %>
 </ul>
+
+<div id="new-bleat">
+  <form action="/bleats" method="post">
+    Content: <input type="text" maxlength="140" name="content">
+    <input type="submit" value="Add bleat">
+  </form>
+</div>
